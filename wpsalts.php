@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * PHP CLI Excutable file. Outputs the required WordPress keys and salts in
+ * either the traditional WordPress define format or the Composer driven
+ * DotEnv format.
+ *
+ * When loaded via composer this file can be executed in CLI as follows:
+ * vendor/bin/wpsalts
+ *
+ * @author Rob Waller <rdwaller1984@googlemail.com>
+ */
+
+
+/**
+ * Load the correct autoloader dependent on how this file is being executed.
+ */
+$paths = [
+    __DIR__.'/vendor/autoload.php',
+    __DIR__.'/../../autoload.php'
+];
+
+foreach ($paths as $path) {
+    if (file_exists($path)) {
+        require_once $path;
+        break;
+    }
+}
+
+/**
+ * Load the WordPress salts class
+ */
+$salts = new \Sanket\envgenerator\Salts;
+
+/**
+ * Return the WordPress salts in a DotEnv format for use in .env files.
+ */
+//if (isset($argv[1]) && $argv[1] === 'dbusername') {
+        echo $salts->dotEnv($argv[1], $argv[2],$argv[3], $argv[4],$argv[5], $argv[6],$argv[7]);
+        die();
+//    }

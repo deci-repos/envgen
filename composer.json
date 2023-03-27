@@ -1,0 +1,18 @@
+{
+    "name": "sanket/envgenerator",
+    "autoload": {
+        "psr-4": {
+            "Sanket\\Envgenerator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "sanket",
+            "email": "59478407+sanketkul@users.noreply.github.com"
+        }
+    ],
+    "require": {},
+    "bin": [
+        "wpsalts"
+    ]
+}
