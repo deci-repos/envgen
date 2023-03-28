@@ -31,7 +31,7 @@ foreach ($paths as $path) {
 /**
  * Load the WordPress salts class
  */
-$salts = new \Sanket\envgenerator\Salts;
+$salts = new \Sanket\Envgenerator\Salts;
 
 /**
  * Return the WordPress salts in a DotEnv format for use in .env files.
