@@ -15,6 +15,7 @@
     ],
     "require": {},
     "bin": [
-        "wpsalts"
+        "wpsalts",
+        "copyfolder"
     ]
 }
