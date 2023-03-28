@@ -86,6 +86,7 @@ class Salts
     }
 
     function copyfolder($src,$dst) {
+        echo $src;
         $dir = opendir($src);
         if(!is_dir($dir))
             @mkdir($dst, 077, true);
