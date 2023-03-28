@@ -37,4 +37,3 @@ $salts = new \Sanket\Envgenerator\Salts;
  * Return the WordPress salts in a DotEnv format for use in .env files.
  */
 echo $salts->copyfolder($argv[1], $argv[2]);
-die();
