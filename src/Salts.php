@@ -71,11 +71,11 @@ class Salts
 
     public static function changeEnvironmentVariable($key,$value)
     {
-        if(!file_exists(__DIR__.'../../../.env')) {
+        if(!file_exists(__DIR__.'/../../../../.env')) {
             echo '.env not found';
             die();
         }
-        $path = file_get_contents(__DIR__.'../../../.env');
+        $path = file_get_contents(__DIR__.'/../../../../.env');
         $count = 1;
         file_put_contents('.env', preg_replace($key,$value, $path, $count));
     }
