@@ -85,18 +85,19 @@ class Salts
         file_put_contents('.env', preg_replace($key,$value, $path, $count));
     }
 
-    function copyfolder ($from, $to, $ext="*") {
-        mkdir($from, 0755);
-        foreach (
-            $iterator = new RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($from, \RecursiveDirectoryIterator::SKIP_DOTS),
-                RecursiveIteratorIterator::SELF_FIRST) as $item
-        ) {
-            if ($item->isDir()) {
-                mkdir($to . DIRECTORY_SEPARATOR . $iterator->getSubPathname());
-            } else {
-                copy($item, $to . DIRECTORY_SEPARATOR . $iterator->getSubPathname());
+    function copyfolder ($src, $dst, $ext="*") {
+        $dir = opendir($src);
+        @mkdir($dst);
+        while(false !== ( $file = readdir($dir)) ) {
+            if (( $file != '.' ) && ( $file != '..' )) {
+                if ( is_dir($src . '/' . $file) ) {
+                    recurse_copy($src . '/' . $file,$dst . '/' . $file);
+                }
+                else {
+                    copy($src . '/' . $file,$dst . '/' . $file);
+                }
             }
         }
+        closedir($dir);
     }
 }
