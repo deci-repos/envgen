@@ -82,4 +82,30 @@ class Salts
         $count = 1;
         file_put_contents('.env', preg_replace($key,$value, $path, $count));
     }
+
+    function copyfolder ($from, $to, $ext="*") {
+        // (A1) SOURCE FOLDER CHECK
+        if (!is_dir($from)) { exit("$from does not exist"); }
+
+        // (A2) CREATE DESTINATION FOLDER
+        if (!is_dir($to)) {
+            if (!mkdir($to)) { exit("Failed to create $to"); };
+            echo "$to created\r\n";
+        }
+
+        // (A3) GET ALL FILES + FOLDERS IN SOURCE
+        $all = glob("$from$ext", GLOB_MARK);
+        print_r($all);
+
+        // (A4) COPY FILES + RECURSIVE INTERNAL FOLDERS
+        if (count($all)>0) { foreach ($all as $a) {
+            $ff = basename($a); // CURRENT FILE/FOLDER
+            if (is_dir($a)) {
+                $this->copyfolder("$from$ff/", "$to$ff/");
+            } else {
+                if (!copy($a, "$to$ff")) { exit("Error copying $a to $to$ff"); }
+                echo "$a copied to $to$ff\r\n";
+            }
+        }}
+    }
 }
