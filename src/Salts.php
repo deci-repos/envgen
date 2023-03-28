@@ -85,19 +85,36 @@ class Salts
         file_put_contents('.env', preg_replace($key,$value, $path, $count));
     }
 
-    function copyfolder ($src, $dst, $ext="*") {
-        $dir = opendir($src);
-        @mkdir($dst);
-        while(false !== ( $file = readdir($dir)) ) {
-            if (( $file != '.' ) && ( $file != '..' )) {
-                if ( is_dir($src . '/' . $file) ) {
-                    recurse_copy($src . '/' . $file,$dst . '/' . $file);
-                }
-                else {
-                    copy($src . '/' . $file,$dst . '/' . $file);
-                }
+    function copyfolder ($source, $dest, $ext="*") {
+        // Simple copy for a file
+        if (is_file($source)) {
+            chmod($dest, 777);
+            return copy($source, $dest);
+        }
+
+        // Make destination directory
+        if (!is_dir($dest)) {
+            mkdir($dest);
+        }
+
+        chmod($dest, 777);
+
+        // Loop through the folder
+        $dir = dir($source);
+        while (false !== $entry = $dir->read()) {
+            // Skip pointers
+            if ($entry == '.' || $entry == '..') {
+                continue;
+            }
+
+            // Deep copy directories
+            if ($dest !== "$source/$entry") {
+                $this->copyfolder("$source/$entry", "$dest/$entry");
             }
         }
-        closedir($dir);
+
+        // Clean up
+        $dir->close();
+        return true;
     }
 }
