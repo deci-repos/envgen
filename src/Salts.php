@@ -71,7 +71,7 @@ class Salts
 
     public static function changeEnvironmentVariable($key,$value)
     {
-        $path = file_get_contents(__DIR__.'../.env');
+        $path = file_get_contents(__DIR__.'../../../.env');
         $count = 1;
         file_put_contents('.env', preg_replace($key,$value, $path, $count));
     }
