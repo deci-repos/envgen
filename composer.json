@@ -16,6 +16,7 @@
     "require": {},
     "bin": [
         "wpsalts",
-        "copyfolder"
+        "copyfolder",
+        "updateenv"
     ]
 }

@@ -85,21 +85,9 @@ class Salts
         file_put_contents('.env', preg_replace($key,$value, $path, $count));
     }
 
-    function copyfolder($src,$dst) {
-        echo $src;
-        $dir = opendir($src);
-        if(!is_dir($dir))
-            @mkdir($dst, 077, true);
-        while(( $file = readdir($dir)) ) {
-            if (( $file != '.' ) && ( $file != '..' )) {
-                if ( is_dir($src . '/' . $file) ) {
-                    $this->copyfolder($src .'/'. $file, $dst .'/'. $file);
-                }
-                else {
-                    copy($src .'/'. $file,$dst .'/'. $file);
-                }
-            }
-        }
-        closedir($dir);
+    public function updateEnv()
+    {
+        unlink(__DIR__.'/../../../../.env');
+        rename(__DIR__.'/../../../../'.'.env.example', '.env');
     }
 }
