@@ -1,5 +1,6 @@
 {
     "name": "sanket/envgenerator",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Sanket\\Envgenerator\\": "src/"
