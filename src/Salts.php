@@ -2,6 +2,8 @@
 
 namespace Sanket\Envgenerator;
 
+use RecursiveIteratorIterator;
+
 class Salts
 {
     /**
@@ -84,28 +86,17 @@ class Salts
     }
 
     function copyfolder ($from, $to, $ext="*") {
-        // (A1) SOURCE FOLDER CHECK
-        if (!is_dir($from)) { exit("$from does not exist"); }
-
-        // (A2) CREATE DESTINATION FOLDER
-        if (!is_dir($to)) {
-            if (!mkdir($to)) { exit("Failed to create $to"); };
-            echo "$to created\r\n";
-        }
-
-        // (A3) GET ALL FILES + FOLDERS IN SOURCE
-        $all = glob("$from$ext", GLOB_MARK);
-        print_r($all);
-
-        // (A4) COPY FILES + RECURSIVE INTERNAL FOLDERS
-        if (count($all)>0) { foreach ($all as $a) {
-            $ff = basename($a); // CURRENT FILE/FOLDER
-            if (is_dir($a)) {
-                $this->copyfolder("$from$ff/", "$to/$ff/");
+        mkdir($from, 0755);
+        foreach (
+            $iterator = new RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($from, \RecursiveDirectoryIterator::SKIP_DOTS),
+                RecursiveIteratorIterator::SELF_FIRST) as $item
+        ) {
+            if ($item->isDir()) {
+                mkdir($to . DIRECTORY_SEPARATOR . $iterator->getSubPathname());
             } else {
-                if (!copy($a, "$to$ff")) { exit("Error copying $a to $to$ff"); }
-                echo "$a copied to $to$ff\r\n";
+                copy($item, $to . DIRECTORY_SEPARATOR . $iterator->getSubPathname());
             }
-        }}
+        }
     }
 }
