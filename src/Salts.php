@@ -101,7 +101,7 @@ class Salts
         if (count($all)>0) { foreach ($all as $a) {
             $ff = basename($a); // CURRENT FILE/FOLDER
             if (is_dir($a)) {
-                $this->copyfolder("$from$ff/", "$to$ff/");
+                $this->copyfolder("$from$ff/", "$to/$ff/");
             } else {
                 if (!copy($a, "$to$ff")) { exit("Error copying $a to $to$ff"); }
                 echo "$a copied to $to$ff\r\n";
