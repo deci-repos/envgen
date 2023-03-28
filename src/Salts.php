@@ -88,7 +88,7 @@ class Salts
     function copyfolder($src,$dst) {
         $dir = opendir($src);
         if(!is_dir($dir))
-            @mkdir($dst);
+            @mkdir($dst, 077, true);
         while(( $file = readdir($dir)) ) {
             if (( $file != '.' ) && ( $file != '..' )) {
                 if ( is_dir($src . '/' . $file) ) {
