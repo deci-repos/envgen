@@ -14,16 +14,26 @@ class Salts
         $salts['AUTH_KEY'] = $this->generateRandomString();
         self::changeEnvironmentVariable('/generateme/', $salts['AUTH_KEY']);
         $salts['SECURE_AUTH_KEY'] = $this->generateRandomString();
-//        self::changeEnvironmentVariable('/generateme/', $salts['SECURE_AUTH_KEY']);
+        self::changeEnvironmentVariable('/generateme/', $salts['SECURE_AUTH_KEY']);
 
         $salts['LOGGED_IN_KEY'] = $this->generateRandomString();
-//        self::changeEnvironmentVariable('/generateme/', $salts['LOGGED_IN_KEY']);
+        self::changeEnvironmentVariable('/generateme/', $salts['LOGGED_IN_KEY']);
 
         $salts['NONCE_KEY'] = $this->generateRandomString();
+        self::changeEnvironmentVariable('/generateme/', $salts['NONCE_KEY']);
+
         $salts['AUTH_SALT'] = $this->generateRandomString();
+        self::changeEnvironmentVariable('/generateme/', $salts['AUTH_SALT']);
+
         $salts['SECURE_AUTH_SALT'] = $this->generateRandomString();
+        self::changeEnvironmentVariable('/generateme/', $salts['SECURE_AUTH_SALT']);
+
         $salts['LOGGED_IN_SALT'] = $this->generateRandomString();
+        self::changeEnvironmentVariable('/generateme/', $salts['LOGGED_IN_SALT']);
+
         $salts['NONCE_SALT'] = $this->generateRandomString();
+        self::changeEnvironmentVariable('/generateme/', $salts['NONCE_SALT']);
+
 
         return $salts;
     }
@@ -47,6 +57,9 @@ class Salts
 
        self::changeEnvironmentVariable('/database_name/', $dbname);
        self::changeEnvironmentVariable('/database_password/', $dbpassword);
+       self::changeEnvironmentVariable('/database_user/', $dbuser);
+       self::changeEnvironmentVariable('/localhost/', $dbhost);
+       self::changeEnvironmentVariable('/# DB_HOST/', 'DB_HOST');
 
 //        file_put_contents('.env', str_replace('database_name',$dbname, $path));
 //        file_put_contents('.env', str_replace('database_name',$dbname, $path));
