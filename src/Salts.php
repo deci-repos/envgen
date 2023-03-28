@@ -62,7 +62,7 @@ class Salts
         self::changeEnvironmentVariable('/# DB_HOST/', 'DB_HOST');
         self::changeEnvironmentVariable('/development/', $wp_env);
         self::changeEnvironmentVariable('/http://example.com/', $wp_home);
-        self::changeEnvironmentVariable('/\$\{WP_HOME\}\/wp/', $wp_siteurl);
+        self::changeEnvironmentVariable('/\${WP_HOME}\/wp/', $wp_siteurl);
 
 //        file_put_contents('.env', str_replace('database_name',$dbname, $path));
 //        file_put_contents('.env', str_replace('database_name',$dbname, $path));
